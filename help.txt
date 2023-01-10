@@ -1,0 +1,5 @@
+#print all variables for host
+ansible all -m setup
+
+#exwcute command
+ansible all -m shell -a 'ls -l /'
