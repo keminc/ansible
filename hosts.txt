@@ -1,2 +1,5 @@
 [my_host]
 timeweb ansible_host=127.0.0.1 owner=Evgeny
+
+[linux:children]
+my_host
