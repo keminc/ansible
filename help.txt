@@ -1,5 +1,10 @@
 #print all variables for host
 ansible all -m setup
 
-#exwcute command
+#execute command
 ansible all -m shell -a 'ls -l /'
+
+#create roles
+mkdir roles
+cd roles/
+ansible-galaxy init deplay_nginx_web

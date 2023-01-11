@@ -1,0 +1,43 @@
+---
+- name: Install Nginx and upload default webpage
+  hosts: my_host
+  become: yes
+
+  vars:
+    src_file: ~/ansible/other_files/www/index.html
+    dest_file: /var/www/html/
+
+  tasks:
+    #print os version from os env.
+    - name: Check OS
+      debug: 
+        var: ansible_os_family 
+
+
+    #=== Block for Debian ===
+    - block:     
+        - name: Install Nginx Web Server for Debian
+          apt: name=nginx-full state=latest
+    
+      when: ansible_os_family == "Debian"
+    #=== end block ===
+
+
+    # use system vars ror running
+    - name: Install Nginx Web Server for RHEL
+      yum: name=nginx-full state=latest
+      when: ansible_os_family == "RedHat"
+
+
+    - name: Copy my page
+      copy: src={{ src_file }} dest={{ dest_file }}
+      notify: #start triger
+         - Restart Nginx 
+
+    - name: Start Nginx and Enabled
+      service: name=nginx state=started enabled=no
+
+  # get events
+  handlers:
+   - name: Restart Nginx
+     service: name=nginx state=restarted

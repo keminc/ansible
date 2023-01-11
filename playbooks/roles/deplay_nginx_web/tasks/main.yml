@@ -1,0 +1,9 @@
+---
+# tasks file for deplay_nginx_web
+- name: Copy & modify my page
+  template: src=index.html.j2 dest={{ dest }}/index.html mode=0555
+  notify: #start triger
+         - Restart Nginx
+
+- name: Start Nginx and Enabled
+  service: name=nginx state=started enabled=no

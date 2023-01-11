@@ -1,0 +1,23 @@
+---
+- name: Edit web page content 
+  hosts: my_host
+  become: yes
+
+  vars:
+    src: ~/ansible/other_files/www/index.html.j2
+    dest: /var/www/html/
+
+  tasks:
+
+    - name: Copy & modify my page
+      template: src={{ src }} dest={{ dest }}/index.html mode=0555
+      notify: #start triger
+         - Restart Nginx 
+
+    - name: Start Nginx and Enabled
+      service: name=nginx state=started enabled=no
+
+  # get events
+  handlers:
+   - name: Restart Nginx
+     service: name=nginx state=restarted

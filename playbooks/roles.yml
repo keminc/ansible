@@ -1,0 +1,7 @@
+---
+- name: Edit web page content
+  hosts: my_host
+  become: yes
+
+  roles:
+    - { role: deplay_nginx_web, when: ansible_system == 'Linux' }

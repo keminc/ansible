@@ -1,0 +1,35 @@
+---
+- name: Loops Playbook
+  hosts: my_host
+  become: yes
+
+  tasks:
+  - name: Say Hello to ALL
+    debug:
+      # item - is reserv word
+      msg="Hellow {{ item }}"
+    loop:
+       - "Vasay"
+       - "Petya"
+       - "Masha"
+
+  - name: Loop until
+    shell:  'echo -n Hi >> /tmp/test.txt && cat /tmp/test.txt'
+    #add output to var output
+    register: output_var
+    delay: 1
+    retries: 5
+    until: output_var.stdout.find("HiHiHiHi") == false
+
+  - name: Print output_var
+    debug:
+       var: output_var.stdout
+
+
+
+  - name: Install many packages
+    apt: name={{ item }} state=latest
+    loop:
+      - "nginx"
+      - "mc"
+      - "nmap"
