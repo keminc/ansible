@@ -3,6 +3,7 @@ ansible-playbook playbooks/roles.yml
 
 #run with vars
 ansible-playbook playbooks/roles.yml --extra-var='owner=Denis'
+
 #print all variables for host
 ansible all -m setup
 
