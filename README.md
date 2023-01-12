@@ -6,7 +6,7 @@ This is example of using <b>Ansible</b>.
  3. How to work with Roles and Playbooks
 
 <b>How to use</b>:
-In playbook forlder you can find all exemples.
+In playbook folder you can find all exemples.
 
 <b>Commands</b>:
 #run <br>
