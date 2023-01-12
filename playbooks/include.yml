@@ -1,0 +1,10 @@
+---
+- name: Include task
+  hosts: my_host
+
+  tasks:
+  - name: Ping
+    #import:
+    include: ping4include.yml
+
+  - include: ping4include.yml mytext='Hi'

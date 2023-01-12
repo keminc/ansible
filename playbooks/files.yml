@@ -1,0 +1,25 @@
+---
+- name: Work with files and dirs
+  hosts: my_host
+  become: yes
+  
+  vars:
+    mytext: "Hi from Evgeny"
+
+  tasks:
+  - name: Ping
+    ping:
+
+  - name: Create dir
+    file:
+     path: /tmp/ansible-test/1
+     state: directory
+     mode: 0755
+  
+  - name: Create file
+    copy:
+     dest: /tmp/ansible-test/1/myfile.txt
+     content: |
+        Line 1.
+        Line 2 with text: {{ mytext }}
+

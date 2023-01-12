@@ -1,0 +1,26 @@
+---
+- name: Test wait while commands not finish
+  hosts: my_host
+
+  vars:
+    myfile: /tmp/a_wait.txt
+    sleep: 15
+  tasks:
+
+  - name: Start task for {{ sleep }} sec  and do not wait responce
+    shell: "sleep {{ sleep }} && echo Done > {{ myfile }} &"
+    async: 1
+    # not wait result
+    poll: 0
+
+  - name: Wait until file creating
+    wait_for:
+      path: "{{ myfile }}"
+      state: present
+      search_regex: Done
+      delay: 1
+      timeout: 20
+
+  - file:
+     path: "{{ myfile }}"
+     state: absent

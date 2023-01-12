@@ -23,7 +23,7 @@
         var: full_message
    
    - debug:
-           var: ansible_distribution
+        var: ansible_distribution
 
 
    - shell:

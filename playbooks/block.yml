@@ -1,0 +1,11 @@
+---
+- name: Test block
+  hosts: my_host
+
+  tasks:
+  - block:
+    
+    - name: Some action
+      shell: "echo Hi"
+    
+    when: ansible_os_family == 'RHEL'

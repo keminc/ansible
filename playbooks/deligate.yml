@@ -1,0 +1,16 @@
+---
+- name: Test connection
+  hosts: all
+  become: yes
+
+  tasks:
+  - block:
+    - name: Say Hi
+      shell: "echo Hi > /tmp/a_hi.txt"
+      register: out
+
+    - debug:
+       var: out.stdout
+
+      #run only on my current server
+    delegate_to: timeweb
