@@ -9,19 +9,20 @@ This is example of using <b>Ansible</b>.
 In playbook forlder you can find all exemples.
 
 <b>Commands</b>:
-#run
+#run <br>
 ansible-playbook playbooks/roles.yml
 
-#run with vars
+#run with vars <br>
 ansible-playbook playbooks/roles.yml --extra-var='owner=Denis'
 
-#print all variables for host
+#print all variables for host <br>
 ansible all -m setup
 
-#execute command
+#execute command <br>
 ansible all -m shell -a 'ls -l /'
 
-#create roles
-mkdir roles
-cd roles/
+#create roles <br>
+mkdir roles <br>
+cd roles/ <br>
 ansible-galaxy init deplay_nginx_web
+
