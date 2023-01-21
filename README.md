@@ -29,6 +29,6 @@ ansible-galaxy init deplay_nginx_web
 #Run vault playbook
 ansible-playbook playbooks/vault.yml --ask-vault-pass #--vault-password-file passfile.txt
 
-#Vault string
-ansible-vault encrypt_string
+#Vault string <br>
+ansible-vault encrypt_string <br>
 echo -n 'Password01' | ansible-vault encrypt_string
