@@ -26,3 +26,9 @@ mkdir roles <br>
 cd roles/ <br>
 ansible-galaxy init deplay_nginx_web
 
+#Run vault playbook
+ansible-playbook playbooks/vault.yml --ask-vault-pass #--vault-password-file passfile.txt
+
+#Vault string
+ansible-vault encrypt_string
+echo -n 'Password01' | ansible-vault encrypt_string

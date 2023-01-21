@@ -1,0 +1,30 @@
+---
+- name: Vault 
+  hosts: my_host
+  become: yes
+
+  vars:
+    admin_pwd: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          65343966336536316132626266353632306537666632386263386134303232666238313132653631
+          6333376639633933343632613466653836333861363463320a663836313162653339353538323165
+          37663933663766313765333063616666326265366632313537323961646566313534663563653062
+          3736356436363332620a666439306233376262313732633339353233363064306434663763656130
+          3832
+
+
+  tasks:
+  - name: Install tee
+    yum: name=tree state=latest
+
+  - name: Create config file
+    copy:
+      dest: /tmp/ansible_vault.txt
+      content: |
+        port = 9093
+        log  = 7days
+        home = /opt/kafka/bin
+        user = admin
+        password = {{ admin_pwd }}
+
+

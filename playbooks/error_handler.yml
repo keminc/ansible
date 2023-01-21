@@ -1,0 +1,40 @@
+---
+- name: Error handler
+  hosts: all
+  become: yes
+
+  #run commands on unrechble anyware
+  #ignore_unreachable: yes
+  
+  #stop on any error
+  #any_errors_fatal: true  
+
+
+  tasks:
+  - name: Do something wrong
+    #command: ls -l /tmp/notexist
+    apt: 
+        name=treee 
+        state=latest
+    ignore_errors: yes
+
+  - name: Ex. with search text
+    shell: echo fail_task
+    register: result
+    failed_when: "'fail_task' in result.stdout"
+    ignore_errors: yes
+
+  - name: Ex. with return code
+    shell: ls -l /tmp/na_file
+    register: result
+    failed_when: result.rc != 0
+    ignore_errors: yes
+  - debug:
+      var: result
+
+  - name: Echo something 2
+    shell: echo Goodbay
+    register: result
+  - debug:
+      var:  result.stdout 
+
